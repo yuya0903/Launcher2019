@@ -1,0 +1,11 @@
+﻿{
+  "title": "出前クエスト",
+  "version": "2017年度版",
+  "description": "出前を仙人に届けてね。",
+  "executable": "catering.exe",
+  "icon": "icon.png",
+  "detail": {
+    "file": "movie.mp4",
+    "is_movie": true
+  }
+}
