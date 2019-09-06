@@ -65,8 +65,9 @@ struct GameProfile {
   fs::path detail;
   int detailHandle;
   bool is_movie;
+  int detailWidth_ = 0, detailHeight = 0;
   GameProfile(std::shared_ptr<Logger> logger) :
-    GameProfile(logger, fs::current_path(), TEXT("title unspecified"), TEXT("-1"), TEXT("description is not available")) {}
+    GameProfile(logger, fs::current_path(), TEXT("<未設定>"), TEXT("不詳"), TEXT("<未設定>")) {}
   GameProfile(
     std::shared_ptr<Logger> logger,
     const fs::path& dir,
@@ -95,22 +96,38 @@ struct GameProfile {
     icon(icon),
     detail(detail) {}
   void loadImage() {
-    if (fs::exists(dir / icon))
+    if (fs::exists(dir / icon)) {
       iconHandle = LoadGraph((dir / icon).c_str());
+      if (iconHandle == NULL) {
+        logger->err(icon.string() + "を開けませんでした");
+        return;
+      }
+    }
     else
       logger->err(dir.string() + "内に" + icon.string() + "が存在しません。");
-    if (fs::exists(dir / detail))
+    if (fs::exists(dir / detail)) {
       detailHandle = LoadGraph((dir / detail).c_str());
+      if (detailHandle == NULL) {
+        logger->err(detail.string() + "を開けませんでした");
+        return;
+      }
+      GetGraphSize(detailHandle, &detailWidth_, &detailHeight);
+    }
+    else logger->err(dir.string() + "内に" + detail.string() + "が存在しません。");
   }
 };
 
 std::vector<GameProfile> games;
 
 int Init(std::shared_ptr<Logger> logger) {
+  SetUseTransColor(FALSE);
   SetDoubleStartValidFlag(TRUE);
-  ChangeWindowMode(TRUE);
+  // ChangeWindowMode(TRUE);
   SetDrawScreen(DX_SCREEN_BACK);
+  SetBackgroundColor(255, 255, 255);
   if (DxLib_Init() == -1)return -1;
+
+  games.clear();
 
   fs::path gameDir = fs::current_path() / TEXT("Games");
   fs::path metaFile = "settings.json";
@@ -136,26 +153,31 @@ int Init(std::shared_ptr<Logger> logger) {
     ptree::wptree json_data;
     std::locale utf_8("ja-JP.UTF-8");
     ifs.imbue(utf_8);
-    ptree::json_parser::read_json(ifs, json_data);
-    GameProfile profile(logger);
-    profile.dir = *itr;
-    if (auto opt = json_data.get_child_optional(TEXT("title")))
-      profile.title = opt->get_value<std::wstring>();
-    if (auto opt = json_data.get_child_optional(TEXT("version")))
-      profile.version = opt->get_value<std::wstring>();
-    if (auto opt = json_data.get_child_optional(TEXT("description")))
-      profile.description = opt->get_value<std::wstring>();
-    if (auto opt = json_data.get_child_optional(TEXT("executable")))
-      profile.executable = opt->get_value<std::wstring>();
-    if (auto opt = json_data.get_child_optional(TEXT("icon")))
-      profile.icon = opt->get_value<std::wstring>();
-    if (auto opt = json_data.get_child_optional(TEXT("detail"))) {
-      if (auto opt2 = opt->get_child_optional(TEXT("file")))
-        profile.detail = opt2->get_value<std::wstring>();
-      if (auto opt2 = opt->get_child_optional(TEXT("is_movie")))
-        profile.is_movie = opt2->get_value<bool>();
+    try {
+      ptree::json_parser::read_json(ifs, json_data);
+      GameProfile profile(logger);
+      profile.dir = *itr;
+      if (auto opt = json_data.get_child_optional(TEXT("title")))
+        profile.title = opt->get_value<std::wstring>();
+      if (auto opt = json_data.get_child_optional(TEXT("version")))
+        profile.version = opt->get_value<std::wstring>();
+      if (auto opt = json_data.get_child_optional(TEXT("description")))
+        profile.description = opt->get_value<std::wstring>();
+      if (auto opt = json_data.get_child_optional(TEXT("executable")))
+        profile.executable = opt->get_value<std::wstring>();
+      if (auto opt = json_data.get_child_optional(TEXT("icon")))
+        profile.icon = opt->get_value<std::wstring>();
+      if (auto opt = json_data.get_child_optional(TEXT("detail"))) {
+        if (auto opt2 = opt->get_child_optional(TEXT("file")))
+          profile.detail = opt2->get_value<std::wstring>();
+        if (auto opt2 = opt->get_child_optional(TEXT("is_movie")))
+          profile.is_movie = opt2->get_value<bool>();
+      }
+      games.push_back(profile);
     }
-    games.push_back(profile);
+    catch (const std::exception & e) {
+      logger->info(std::string("read_json failed : ") + e.what());
+    }
   }
 
   for (auto& v : games)v.loadImage();
@@ -170,6 +192,15 @@ enum LaunchError_e {
   GetExitCodeError,
   InvalidPathError,
   Success
+};
+
+const std::vector<std::wstring> ErrStr = {
+  L"CreateProcessError",
+  L"CloseHandleError",
+  L"ChildProcessError",
+  L"GetExitCodeError",
+  L"InvalidPathError",
+  L"Success"
 };
 
 int Launch(const fs::path& path, LaunchError_e& err) {
@@ -226,55 +257,73 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
   InputManager in;
   in.update();
 
-  int selection = 0;
-  int page = 0, prev_page = 0;
+  float exrate = 0.1f;
+  int curSelection = 0, prvSelection = -1;
+  float selectionAngle = 0.f;
+  int curPage = 0, prvPage = 0;
+  bool pageChange = false;
+  float pageChangeAngle = 0.f;
   int selectionX = 0;
   int selectionY = 0;
   const int SelectSpan = 3;
   const int SelectWait = 30;
-  const int ScreenWidth = 640;
-  const int ScreenHeight = 480;
-  const int GameWidth = 128;
-  const int GameHeight = 96;
-  const int GameMarginTop = 10;
-  const int GameMarginLeft = 10;
-  const int GameMarginRight = 10;
-  const int GameMarginBottom = 10;
-  const int Rows = 3;
+  const int Rows = 2;
   const int Cols = 4;
-  const float rate = 0.9f;
+  int ScreenWidth = 640;
+  int ScreenHeight = 480;
 
-  const int GameSpanX = (ScreenWidth - GameMarginLeft - GameMarginRight - GameWidth) / Cols;
-  const int GameSpanY = (ScreenHeight - GameMarginTop - GameMarginBottom - GameHeight) / Rows;
+  GetDefaultState(&ScreenWidth, &ScreenHeight, NULL);
+  SetGraphMode(ScreenWidth, ScreenHeight, 32);
+
+  int GameWidth_ = ScreenWidth / 6;
+  int GameHeight = ScreenHeight / 5;
+  int GameMarginTop = 10;
+  int GameMarginLeft = ScreenWidth / 10;
+  int GameMarginRight = ScreenWidth / 10;
+  int GameMarginBottom = ScreenHeight * 2 / 5;
+
+  int GameSpanX = (ScreenWidth - GameMarginLeft - GameMarginRight - GameWidth_) / (Cols - 1) - GameWidth_;
+  int GameSpanY = (ScreenHeight - GameMarginTop - GameMarginBottom - GameHeight) / (Rows - 1) - GameHeight;
 
   if (Init(logger->shared_from_this()) == -1)return -1;
 
   int pages = games.size() / (Rows * Cols) + (games.size() % (Rows * Cols) ? 1 : 0);
 
   auto calc_selection = [&]() {
-    selection = page * Rows * Cols + selectionY * Cols + selectionX;
+    curSelection = curPage * Rows * Cols + selectionY * Cols + selectionX;
   };
 
   int frame = 0;
-  while (ProcessMessage() != -1 && !in.onKeyHit(KEY_INPUT_ESCAPE)) {
+  while (ProcessMessage() != -1) {
     in.update();
     if (int time = in.getKeyDownTime(KEY_INPUT_LEFT);
       (time > SelectWait&& time% SelectSpan == 0)
       || in.onKeyHit(KEY_INPUT_LEFT)) {
       if (--selectionX < 0) {
-        selectionX = 0;
-        if (page > 0)--page;
+        if (curPage > 0) {
+          --curPage;
+          selectionX = Cols - 1;
+        }
+        else selectionX = 0;
       }
     }
     else if (int time = in.getKeyDownTime(KEY_INPUT_RIGHT);
       (time > SelectWait&& time% SelectSpan == 0)
       || in.onKeyHit(KEY_INPUT_RIGHT)) {
-      if (++selectionX >= Cols - 1) {
-        selectionX = 0;
-        if (page < pages - 1)++page;
+      if (++selectionX >= Cols) {
+        if (curPage < pages - 1) {
+          ++curPage;
+          selectionX = 0;
+          calc_selection();
+          while (games.size() < curSelection) {
+            --selectionY;
+            calc_selection();
+          }
+        }
+        else selectionX = Cols - 1;
       }
       calc_selection();
-      if (selection >= games.size())--selectionX;
+      if (curSelection >= games.size())--selectionX;
       calc_selection();
     }
     else if (int time = in.getKeyDownTime(KEY_INPUT_UP);
@@ -287,58 +336,119 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
       || in.onKeyHit(KEY_INPUT_DOWN)) {
       if (selectionY < Rows - 1)++selectionY;
       calc_selection();
-      if (selection >= games.size())--selectionY;
+      if (curSelection >= games.size())--selectionY;
       calc_selection();
     }
-    prev_page = page;
-    selection = page * Rows * Cols + selectionY * Cols + selectionX;
+
+    if (prvSelection != curSelection)selectionAngle = 0.f;
+
+    if (prvPage != curPage) {
+      pageChangeAngle = 0.f;
+      pageChange = true;
+    }
+    if (pageChange && pageChangeAngle < DX_PI_F)
+      pageChange += DX_PI_F / 30;
+    else pageChange = false;
 
     if (in.onKeyHit(KEY_INPUT_RETURN)) {
       SetDxLibEndPostQuitMessageFlag(FALSE);
       DxLib_End();
       LaunchError_e err;
-      DWORD exitCode = Launch(games[selection].dir / games[selection].executable, err);
+      DWORD exitCode = Launch(games[curSelection].dir / games[curSelection].executable, err);
       if (Init(logger->shared_from_this()) == -1)return -1;
       for (auto& v : games)v.loadImage();
       ClearDrawScreen();
       if (exitCode == -1) {
-        DrawFormatString(0, 0, 0xffffff, TEXT("ゲームの起動中にエラーが発生しました。"));
-        DrawFormatString(0, 16, 0xffffff, TEXT("部員の人に伝えてください。"));
-        DrawFormatString(0, 32, 0xffffff, TEXT("終了コード：%d, エラーコード：%d"), exitCode, err);
+        DrawFormatString(0, 0, 0x000000, TEXT("ゲームの起動中にエラーが発生しました。"));
+        DrawFormatString(0, 16, 0x000000, TEXT("部員の人に伝えてください。"));
+        DrawFormatString(0, 32, 0x000000, TEXT("ゲームディレクトリ：%s"), fs::relative(games[curSelection].dir).c_str());
+        DrawFormatString(0, 48, 0x000000, TEXT("終了コード：%d, エラーコード：%d(%s)"), exitCode, err, ErrStr[err].c_str());
         ScreenFlip();
-        while (ProcessMessage() != -1 && !in.onKeyHit(KEY_INPUT_ESCAPE));
-        break;
+        while (ProcessMessage() != -1 && !in.onKeyHit(KEY_INPUT_ESCAPE))in.update();
       }
       else {
-        DrawFormatString(0, 0, 0xffffff, TEXT("ゲームは終了しました。次の人に替わってください"));
+        DrawFormatString(0, 0, 0x000000, TEXT("ゲームは終了しました。次の人に替わってください"));
         ScreenFlip();
         WaitTimer(1000 * 2);
-        DrawFormatString(0, 16, 0xffffff, TEXT("次に進むにはなにかキーを押してください。"));
+        DrawFormatString(0, 16, 0x000000, TEXT("次に進むには何かキーを押してください。"));
         ScreenFlip();
         WaitKey();
       }
+      curPage = 0;
+      selectionX = 0;
+      selectionY = 0;
+      curSelection = 0;
     }
+
+    if (prvSelection != curSelection) {
+      if (games[curSelection].is_movie)
+        PlayMovieToGraph(games[curSelection].detailHandle);
+      if (prvSelection >= 0 && games[prvSelection].is_movie)
+        PauseMovieToGraph(games[prvSelection].detailHandle);
+    }
+
+    prvSelection = curSelection;
+    prvPage = curPage;
+    calc_selection();
 
     ClearDrawScreen();
 
     for (int y = 0; y < Rows; ++y) {
       for (int x = 0; x < Cols; ++x) {
-        int tmp = page * Rows * Cols + y * Cols + x;
+        float cx = GameMarginLeft + x * (GameWidth_ + GameSpanX) + GameWidth_ / 2.f;
+        float cy = GameMarginTop + y * (GameHeight + GameSpanY) + GameHeight / 2.f;
+        int tmp = curPage * Rows * Cols + y * Cols + x;
         if (games.size() <= tmp)break;
         const auto& game = games[tmp];
-        DrawExtendGraph(
-          GameMarginLeft + x * (GameWidth + GameSpanX),
-          GameMarginTop + y * (GameHeight + GameSpanY),
-          GameMarginLeft + x * (GameWidth + GameSpanX) + GameWidth,
-          GameMarginTop + y * (GameHeight + GameSpanY) + GameHeight,
+        float rate = 1.f;
+        if (curSelection == tmp)rate += sinf(selectionAngle) * exrate;
+        SetDrawBlendMode(DX_BLENDMODE_ALPHA, 64);
+        DrawRoundRectAA(
+          cx - rate * GameWidth_ / 2.f + rate * 10,
+          cy - rate * GameHeight / 2.f + rate * 10,
+          cx + rate * GameWidth_ / 2.f + rate * 10,
+          cy + rate * GameHeight / 2.f + rate * 10,
+          GameWidth_ / 8, GameHeight / 8, 32, 0x000000, TRUE);
+        SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+        DrawRoundRectAA(
+          cx - rate * GameWidth_ / 2.f,
+          cy - rate * GameHeight / 2.f,
+          cx + rate * GameWidth_ / 2.f,
+          cy + rate * GameHeight / 2.f,
+          GameWidth_ / 8, GameHeight / 8, 32, 0xffffff, TRUE);
+        DrawRoundRectAA(
+          cx - rate * GameWidth_ / 2.f,
+          cy - rate * GameHeight / 2.f,
+          cx + rate * GameWidth_ / 2.f,
+          cy + rate * GameHeight / 2.f,
+          GameWidth_ / 8, GameHeight / 8, 32, 0x000000, FALSE);
+        DrawExtendGraphF(
+          cx - rate * (GameWidth_ / 2.f - GameWidth_ / 16.f),
+          cy - rate * (GameHeight / 2.f - GameHeight / 16.f),
+          cx + rate * (GameWidth_ / 2.f - GameWidth_ / 16.f),
+          cy + rate * (GameHeight / 2.f - GameHeight / 16.f),
           game.iconHandle, TRUE);
       }
     }
-    /*for (int i = 0; i < games.size(); ++i) {
-      DrawFormatString(0, i * 16, i == selection ? 0xff0000 : 0xffffff, TEXT("%d : %s"), i, games[i].title.c_str());
-    }*/
-    DrawFormatString(0, 300, 0xff0000, games[selection].description.c_str());
-    DrawFormatString(0, 320, 0xff0000, games[selection].executable.c_str());
+    selectionAngle += DX_PI_F / 30;
+
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate, 0xff0000, TEXT("タイトル　：%s"), games[curSelection].title.c_str());
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + 20, 0xff0000, TEXT("バージョン：%s"), games[curSelection].version.c_str());
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + 40, 0xff0000, TEXT("説明：\n%s"), games[curSelection].description.c_str());
+
+    {
+      const GameProfile& game = games[curSelection];
+      float x = ScreenWidth / 2.f + 5;
+      float y = ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + 5;
+      float h = GameMarginBottom - GameHeight / 2.f * exrate - 10;
+      float w = h * game.detailWidth_ / game.detailHeight;
+      if (w > ScreenWidth / 2.f - 10) {
+        w = ScreenWidth / 2.f - 10;
+        h = w * game.detailHeight / game.detailWidth_;
+      }
+      DrawExtendGraph(x, y, x + w, y + h, game.detailHandle, TRUE);
+    }
+
     ScreenFlip();
   }
 
