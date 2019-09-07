@@ -66,6 +66,7 @@ struct GameProfile {
   int detailHandle;
   bool is_movie;
   int detailWidth_ = 0, detailHeight = 0;
+  int difficulty;
   GameProfile(std::shared_ptr<Logger> logger) :
     GameProfile(logger, fs::current_path(), TEXT("<未設定>"), TEXT("不詳"), TEXT("<未設定>")) {}
   GameProfile(
@@ -75,7 +76,7 @@ struct GameProfile {
     std::wstring version,
     std::wstring_view description
   ) :
-    GameProfile(logger, dir, title, version, description, TEXT("autorun.exe"), TEXT("icon.png"), TEXT("detail.png")) {}
+    GameProfile(logger, dir, title, version, description, TEXT("autorun.exe"), TEXT("icon.png"), TEXT("detail.png"), -1) {}
   GameProfile(
     std::shared_ptr<Logger> logger,
     const fs::path& dir,
@@ -85,16 +86,19 @@ struct GameProfile {
     const fs::path& executable,
     const fs::path& icon,
     const fs::path& detail,
+    int difficulty,
     bool is_movie = false
-  ) :
-    logger(logger),
-    dir(dir),
-    title(title),
-    version(version),
-    description(description),
-    executable(executable),
-    icon(icon),
-    detail(detail) {}
+  )
+    : logger(logger)
+    , dir(dir)
+    , title(title)
+    , version(version)
+    , description(description)
+    , executable(executable)
+    , icon(icon)
+    , difficulty(difficulty)
+    , detail(detail)
+    , is_movie(is_movie) {}
   void loadImage() {
     if (fs::exists(dir / icon)) {
       iconHandle = LoadGraph((dir / icon).c_str());
@@ -173,6 +177,8 @@ int Init(std::shared_ptr<Logger> logger) {
         if (auto opt2 = opt->get_child_optional(TEXT("is_movie")))
           profile.is_movie = opt2->get_value<bool>();
       }
+      if (auto opt = json_data.get_child_optional(TEXT("difficulty")))
+        profile.difficulty = opt->get_value<int>();
       games.push_back(profile);
     }
     catch (const std::exception & e) {
@@ -180,6 +186,12 @@ int Init(std::shared_ptr<Logger> logger) {
     }
   }
 
+  auto comp = [](const GameProfile& a, const GameProfile& b) {
+    if (a.difficulty == -1)return false;
+    if (b.difficulty == -1)return true;
+    return a.difficulty < b.difficulty;
+  };
+  std::sort(std::begin(games), std::end(games), comp);
   for (auto& v : games)v.loadImage();
 
   return 0;
@@ -309,6 +321,13 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
 
   // 0:up, 1:right, 2:down, 3:left
   int joyTime[4] = {};
+
+  const char DiffiCultyStr[][64] = {
+    "<不明>",
+    "Easy(かんたん)",
+    "Normal(ふつう)",
+    "Hard(むずかしい)"
+  };
 
   HANDLE font = AddFontFile(TEXT("azuki.ttf"));
   if (font == NULL)
@@ -562,9 +581,10 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
       }
     }
 
-    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate, 0xff0000, TEXT("タイトル　：%s"), games[curSelection].title.c_str());
-    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + fontSize, 0xff0000, TEXT("バージョン：%s"), games[curSelection].version.c_str());
-    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + fontSize * 2, 0xff0000, TEXT("説明：\n%s"), games[curSelection].description.c_str());
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + fontSize * 0, 0xff0000, TEXT("タイトル　：%s"), games[curSelection].title.c_str());
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + fontSize * 1, 0xff0000, TEXT("難易度　　：%s"), DiffiCultyStr[games[curSelection].difficulty + 1]);
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + fontSize * 2, 0xff0000, TEXT("バージョン：%s"), games[curSelection].version.c_str());
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + fontSize * 3, 0xff0000, TEXT("説明：\n%s"), games[curSelection].description.c_str());
 
     {
       const GameProfile& game = games[curSelection];
