@@ -300,7 +300,7 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
 
   int GameWidth_ = ScreenWidth / 6;
   int GameHeight = ScreenHeight / 5;
-  int GameMarginTop = 10;
+  int GameMarginTop = ScreenHeight / 20;
   int GameMarginLeft = ScreenWidth / 10;
   int GameMarginRight = ScreenWidth / 10;
   int GameMarginBottom = ScreenHeight * 2 / 5;
@@ -322,11 +322,15 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
   // 0:up, 1:right, 2:down, 3:left
   int joyTime[4] = {};
 
-  const char DiffiCultyStr[][64] = {
-    "<不明>",
-    "Easy(かんたん)",
-    "Normal(ふつう)",
-    "Hard(むずかしい)"
+  float SlideTransition = ScreenWidth;
+  float SlideSpeed = 5.f;
+  const TCHAR SlideStr[] = TEXT("物理部展#2019 マウス、コントローラー、もしくはキーボードを使ってゲームを選んでください (クリック、Xボタン、Enterキーでゲーム開始)");
+
+  const TCHAR DiffiCultyStr[][64] = {
+    TEXT("<不明>"),
+    TEXT("Easy(かんたん)"),
+    TEXT("Normal(ふつう)"),
+    TEXT("Hard(むずかしい)")
   };
 
   HANDLE font = AddFontFile(TEXT("azuki.ttf"));
@@ -494,6 +498,7 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
         ScreenFlip();
         WaitKey();
       }
+      in.update();
       curPage = 0;
       selectionX = 0;
       selectionY = 0;
@@ -513,8 +518,13 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
     prvPage = curPage;
     calc_selection();
 
+    SlideTransition -= SlideSpeed;
+    if (SlideTransition < -GetDrawStringWidth(SlideStr, GetStringLength(SlideStr)))
+      SlideTransition = ScreenWidth;
+
     ClearDrawScreen();
 
+    DrawFormatStringF(SlideTransition, 0, 0x000000, SlideStr);
     for (int y = 0; y < Rows; ++y) {
       for (int x = 0; x < Cols; ++x) {
         float cx = GameMarginLeft + x * (GameWidth_ + GameSpanX) + GameWidth_ / 2.f;
