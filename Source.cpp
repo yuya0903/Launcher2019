@@ -122,7 +122,7 @@ std::vector<GameProfile> games;
 int Init(std::shared_ptr<Logger> logger) {
   SetUseTransColor(FALSE);
   SetDoubleStartValidFlag(TRUE);
-  // ChangeWindowMode(TRUE);
+  ChangeWindowMode(TRUE);
   SetDrawScreen(DX_SCREEN_BACK);
   SetBackgroundColor(255, 255, 255);
   if (DxLib_Init() == -1)return -1;
@@ -203,7 +203,7 @@ const std::vector<std::wstring> ErrStr = {
   L"Success"
 };
 
-int Launch(const fs::path& path, LaunchError_e& err) {
+int Launch(const fs::path& path, std::wstring ipAddr, LaunchError_e& err) {
   if (!fs::is_regular_file(path)) {
     err = InvalidPathError;
     return -1;
@@ -216,8 +216,9 @@ int Launch(const fs::path& path, LaunchError_e& err) {
   si.cb = sizeof STARTUPINFO;
 
   DWORD exitCode = -1;
-
-  if (!CreateProcess(path.c_str(), NULL, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, path.parent_path().c_str(), &si, &pi)) {
+  WCHAR cmdLine[256] = {};
+  strcat_sDx(cmdLine, 256, ipAddr.c_str());
+  if (!CreateProcess(path.c_str(), cmdLine, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, path.parent_path().c_str(), &si, &pi)) {
     err = CreateProcessError;
     return -1;
   }
@@ -246,13 +247,22 @@ int Launch(const fs::path& path, LaunchError_e& err) {
 }
 
 int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
-
   std::ofstream ofs("error.txt");
   if (!ofs.is_open()) {
     MessageBox(GetMainWindowHandle(), TEXT("エラー出力用ファイルを開けませんでした"), TEXT("エラー"), MB_OK);
-    exit(EXIT_FAILURE);
+    return EXIT_FAILURE;
   }
   std::shared_ptr<Logger> logger = std::make_shared<Logger>(ofs);
+
+  std::wstring ipAddr;
+  {
+    std::wifstream ifs("ip.txt");
+    if (!ifs.is_open()) {
+      logger->err("ip.txtを開けませんでした。");
+      return EXIT_FAILURE;
+    }
+    ifs >> ipAddr;
+  }
 
   InputManager in;
   in.update();
@@ -263,6 +273,7 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
   int curPage = 0, prvPage = 0;
   bool pageChange = false;
   float pageChangeAngle = 0.f;
+  float arrowAngle = 0.f;
   int selectionX = 0;
   int selectionY = 0;
   const int SelectSpan = 3;
@@ -285,6 +296,22 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
   int GameSpanX = (ScreenWidth - GameMarginLeft - GameMarginRight - GameWidth_) / (Cols - 1) - GameWidth_;
   int GameSpanY = (ScreenHeight - GameMarginTop - GameMarginBottom - GameHeight) / (Rows - 1) - GameHeight;
 
+  int fontSize = ScreenHeight / 30;
+
+  int prvJoy = 0, curJoy = 0;
+
+
+  // 0:up, 1:right, 2:down, 3:left
+  int joyTime[4] = {};
+
+  HANDLE font = AddFontFile(TEXT("azuki.ttf"));
+  if (font == NULL)
+    logger->err("フォントの読み込みに失敗しました。");
+  else
+    ChangeFont(TEXT("あずきフォント"));
+
+  SetFontSize(fontSize);
+
   if (Init(logger->shared_from_this()) == -1)return -1;
 
   int pages = games.size() / (Rows * Cols) + (games.size() % (Rows * Cols) ? 1 : 0);
@@ -296,9 +323,20 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
   int frame = 0;
   while (ProcessMessage() != -1) {
     in.update();
-    if (int time = in.getKeyDownTime(KEY_INPUT_LEFT);
+    prvJoy = curJoy;
+    curJoy = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+    if (curJoy & PAD_INPUT_UP && prvJoy & PAD_INPUT_UP)++joyTime[0];
+    if (curJoy & PAD_INPUT_RIGHT && prvJoy & PAD_INPUT_RIGHT)++joyTime[1];
+    if (curJoy & PAD_INPUT_DOWN && prvJoy & PAD_INPUT_DOWN)++joyTime[2];
+    if (curJoy & PAD_INPUT_LEFT && prvJoy & PAD_INPUT_LEFT)++joyTime[3];
+    if (!(curJoy & PAD_INPUT_UP))joyTime[0] = 0;
+    if (!(curJoy & PAD_INPUT_RIGHT))joyTime[1] = 0;
+    if (!(curJoy & PAD_INPUT_DOWN))joyTime[2] = 0;
+    if (!(curJoy & PAD_INPUT_LEFT))joyTime[3] = 0;
+
+    if (int time = joyTime[3];
       (time > SelectWait&& time% SelectSpan == 0)
-      || in.onKeyHit(KEY_INPUT_LEFT)) {
+      || (curJoy & PAD_INPUT_LEFT && !(prvJoy & PAD_INPUT_LEFT))) {
       if (--selectionX < 0) {
         if (curPage > 0) {
           --curPage;
@@ -307,15 +345,15 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
         else selectionX = 0;
       }
     }
-    else if (int time = in.getKeyDownTime(KEY_INPUT_RIGHT);
+    else if (int time = joyTime[1];
       (time > SelectWait&& time% SelectSpan == 0)
-      || in.onKeyHit(KEY_INPUT_RIGHT)) {
+      || (curJoy & PAD_INPUT_RIGHT && !(prvJoy & PAD_INPUT_RIGHT))) {
       if (++selectionX >= Cols) {
         if (curPage < pages - 1) {
           ++curPage;
           selectionX = 0;
           calc_selection();
-          while (games.size() < curSelection) {
+          while (games.size() <= curSelection) {
             --selectionY;
             calc_selection();
           }
@@ -323,17 +361,18 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
         else selectionX = Cols - 1;
       }
       calc_selection();
-      if (curSelection >= games.size())--selectionX;
+      if (games.size() <= curSelection)
+        --selectionX;
       calc_selection();
     }
-    else if (int time = in.getKeyDownTime(KEY_INPUT_UP);
+    else if (int time = joyTime[0];
       (time > SelectWait&& time% SelectSpan == 0)
-      || in.onKeyHit(KEY_INPUT_UP)) {
+      || (curJoy & PAD_INPUT_UP && !(prvJoy & PAD_INPUT_UP))) {
       if (selectionY > 0)--selectionY;
     }
-    else if (int time = in.getKeyDownTime(KEY_INPUT_DOWN);
+    else if (int time = joyTime[2];
       (time > SelectWait&& time% SelectSpan == 0)
-      || in.onKeyHit(KEY_INPUT_DOWN)) {
+      || (curJoy & PAD_INPUT_DOWN && !(prvJoy & PAD_INPUT_DOWN))) {
       if (selectionY < Rows - 1)++selectionY;
       calc_selection();
       if (curSelection >= games.size())--selectionY;
@@ -350,19 +389,19 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
       pageChange += DX_PI_F / 30;
     else pageChange = false;
 
-    if (in.onKeyHit(KEY_INPUT_RETURN)) {
+    if (!(prvJoy & PAD_INPUT_X) && curJoy & PAD_INPUT_X) {
       SetDxLibEndPostQuitMessageFlag(FALSE);
       DxLib_End();
       LaunchError_e err;
-      DWORD exitCode = Launch(games[curSelection].dir / games[curSelection].executable, err);
+      DWORD exitCode = Launch(games[curSelection].dir / games[curSelection].executable, ipAddr, err);
       if (Init(logger->shared_from_this()) == -1)return -1;
       for (auto& v : games)v.loadImage();
       ClearDrawScreen();
       if (exitCode == -1) {
         DrawFormatString(0, 0, 0x000000, TEXT("ゲームの起動中にエラーが発生しました。"));
-        DrawFormatString(0, 16, 0x000000, TEXT("部員の人に伝えてください。"));
-        DrawFormatString(0, 32, 0x000000, TEXT("ゲームディレクトリ：%s"), fs::relative(games[curSelection].dir).c_str());
-        DrawFormatString(0, 48, 0x000000, TEXT("終了コード：%d, エラーコード：%d(%s)"), exitCode, err, ErrStr[err].c_str());
+        DrawFormatString(0, fontSize, 0x000000, TEXT("部員の人に伝えてください。"));
+        DrawFormatString(0, fontSize * 2, 0x000000, TEXT("ゲームディレクトリ：%s"), fs::relative(games[curSelection].dir).c_str());
+        DrawFormatString(0, fontSize * 3, 0x000000, TEXT("終了コード：%d, エラーコード：%d(%s)"), exitCode, err, ErrStr[err].c_str());
         ScreenFlip();
         while (ProcessMessage() != -1 && !in.onKeyHit(KEY_INPUT_ESCAPE))in.update();
       }
@@ -370,7 +409,7 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
         DrawFormatString(0, 0, 0x000000, TEXT("ゲームは終了しました。次の人に替わってください"));
         ScreenFlip();
         WaitTimer(1000 * 2);
-        DrawFormatString(0, 16, 0x000000, TEXT("次に進むには何かキーを押してください。"));
+        DrawFormatString(0, fontSize, 0x000000, TEXT("次に進むには何かキーを押してください。"));
         ScreenFlip();
         WaitKey();
       }
@@ -381,8 +420,10 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
     }
 
     if (prvSelection != curSelection) {
-      if (games[curSelection].is_movie)
-        PlayMovieToGraph(games[curSelection].detailHandle);
+      if (games[curSelection].is_movie) {
+        SeekMovieToGraph(games[curSelection].detailHandle, 0);
+        PlayMovieToGraph(games[curSelection].detailHandle, DX_PLAYTYPE_LOOP);
+      }
       if (prvSelection >= 0 && games[prvSelection].is_movie)
         PauseMovieToGraph(games[prvSelection].detailHandle);
     }
@@ -431,17 +472,32 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
       }
     }
     selectionAngle += DX_PI_F / 30;
+    arrowAngle += DX_PI_F / 10;
+
+    {
+      float transition = sin(arrowAngle) * 5.f;
+      if (curPage > 0)
+        DrawTriangleAA(
+          -transition + GameMarginLeft / 4, (ScreenHeight - GameMarginBottom) / 2.f,
+          -transition + GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 2 / 5.f,
+          -transition + GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 3 / 5.f, 0x000000, FALSE);
+      if (curPage < pages - 1)
+        DrawTriangleAA(
+          transition + ScreenWidth - GameMarginLeft / 4, (ScreenHeight - GameMarginBottom) / 2.f,
+          transition + ScreenWidth - GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 2 / 5.f,
+          transition + ScreenWidth - GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 3 / 5.f, 0x000000, FALSE);
+    }
 
     DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate, 0xff0000, TEXT("タイトル　：%s"), games[curSelection].title.c_str());
-    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + 20, 0xff0000, TEXT("バージョン：%s"), games[curSelection].version.c_str());
-    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + 40, 0xff0000, TEXT("説明：\n%s"), games[curSelection].description.c_str());
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + fontSize, 0xff0000, TEXT("バージョン：%s"), games[curSelection].version.c_str());
+    DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + fontSize * 2, 0xff0000, TEXT("説明：\n%s"), games[curSelection].description.c_str());
 
     {
       const GameProfile& game = games[curSelection];
-      float x = ScreenWidth / 2.f + 5;
-      float y = ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + 5;
       float h = GameMarginBottom - GameHeight / 2.f * exrate - 10;
       float w = h * game.detailWidth_ / game.detailHeight;
+      float x = ScreenWidth - 5 - w;
+      float y = ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate + 5;
       if (w > ScreenWidth / 2.f - 10) {
         w = ScreenWidth / 2.f - 10;
         h = w * game.detailHeight / game.detailWidth_;
@@ -452,6 +508,7 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
     ScreenFlip();
   }
 
+  RemoveFontFile(font);
   SetDxLibEndPostQuitMessageFlag(TRUE);
   DxLib_End();
 
