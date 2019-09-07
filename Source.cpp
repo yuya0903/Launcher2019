@@ -299,7 +299,13 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
   int fontSize = ScreenHeight / 30;
 
   int prvJoy = 0, curJoy = 0;
+  int prvMouseInput = 0, curMouseInput = 0;
+  int prvMouseX = 0, prvMouseY = 0;
+  int curMouseX = 0, curMouseY = 0;
+  bool mouseMove = false;
 
+  bool hoverLeft = false;
+  bool hoverRight = false;
 
   // 0:up, 1:right, 2:down, 3:left
   int joyTime[4] = {};
@@ -324,6 +330,12 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
   while (ProcessMessage() != -1) {
     in.update();
     prvJoy = curJoy;
+    prvMouseX = curMouseX;
+    prvMouseY = curMouseY;
+    prvMouseInput = curMouseInput;
+    GetMousePoint(&curMouseX, &curMouseY);
+    mouseMove = curMouseX != prvMouseX || curMouseY != prvMouseY;
+    curMouseInput = GetMouseInput();
     curJoy = GetJoypadInputState(DX_INPUT_KEY_PAD1);
     if (curJoy & PAD_INPUT_UP && prvJoy & PAD_INPUT_UP)++joyTime[0];
     if (curJoy & PAD_INPUT_RIGHT && prvJoy & PAD_INPUT_RIGHT)++joyTime[1];
@@ -379,6 +391,50 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
       calc_selection();
     }
 
+    for (int y = 0; y < Rows; ++y) {
+      for (int x = 0; x < Cols; ++x) {
+        if (mouseMove
+          && GameMarginLeft + (GameWidth_ + GameSpanX) * x <= curMouseX
+          && curMouseX <= GameMarginLeft + (GameWidth_ + GameSpanX) * x + GameWidth_
+          && GameMarginTop + (GameHeight + GameSpanY) * y <= curMouseY
+          && curMouseY <= GameMarginTop + (GameHeight + GameSpanY) * y + GameHeight) {
+          int tx = selectionX, ty = selectionY;
+          selectionX = x;
+          selectionY = y;
+          calc_selection();
+          if (games.size() <= curSelection) {
+            selectionX = tx;
+            selectionY = ty;
+          }
+          calc_selection();
+        }
+      }
+    }
+
+    hoverLeft = GameMarginLeft / 4 <= curMouseX && curMouseX <= GameMarginLeft * 3 / 4
+      && (ScreenHeight - GameMarginBottom - GameMarginTop) * 2 / 5.f <= curMouseY
+      && curMouseY <= (ScreenHeight - GameMarginBottom - GameMarginTop) * 3 / 5.f;
+
+    hoverRight = ScreenWidth - GameMarginRight * 3 / 4.f <= curMouseX && curMouseX <= ScreenWidth - GameMarginRight / 4.f
+      && (ScreenHeight - GameMarginBottom - GameMarginTop) * 2 / 5.f <= curMouseY
+      && curMouseY <= (ScreenHeight - GameMarginBottom - GameMarginTop) * 3 / 5.f;
+
+    if (!(prvMouseInput & MOUSE_INPUT_LEFT) && curMouseInput & MOUSE_INPUT_LEFT && hoverLeft) {
+      if (curPage > 0) {
+        --curPage;
+        selectionX = selectionY = 0;
+        calc_selection();
+      }
+    }
+
+    if (!(prvMouseInput & MOUSE_INPUT_LEFT) && curMouseInput & MOUSE_INPUT_LEFT && hoverRight) {
+      if (curPage < pages - 1) {
+        ++curPage;
+        selectionX = selectionY = 0;
+        calc_selection();
+      }
+    }
+
     if (prvSelection != curSelection)selectionAngle = 0.f;
 
     if (prvPage != curPage) {
@@ -389,7 +445,13 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
       pageChange += DX_PI_F / 30;
     else pageChange = false;
 
-    if (!(prvJoy & PAD_INPUT_X) && curJoy & PAD_INPUT_X) {
+    if ((!(prvJoy & PAD_INPUT_X) && curJoy & PAD_INPUT_X)
+      || in.onKeyHit(KEY_INPUT_RETURN)
+      || (!(prvMouseInput & MOUSE_INPUT_LEFT) && curMouseInput & MOUSE_INPUT_LEFT
+        && GameMarginLeft + (GameWidth_ + GameSpanX) * selectionX <= curMouseX
+        && curMouseX <= GameMarginLeft + (GameWidth_ + GameSpanX) * selectionX + GameWidth_
+        && GameMarginTop + (GameHeight + GameSpanY) * selectionY <= curMouseY
+        && curMouseY <= GameMarginTop + (GameHeight + GameSpanY) * selectionY + GameHeight)) {
       SetDxLibEndPostQuitMessageFlag(FALSE);
       DxLib_End();
       LaunchError_e err;
@@ -476,16 +538,28 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
 
     {
       float transition = sin(arrowAngle) * 5.f;
-      if (curPage > 0)
+      if (curPage > 0) {
+        if (hoverLeft)
+          DrawTriangleAA(
+            -transition + GameMarginLeft / 4, (ScreenHeight - GameMarginBottom) / 2.f,
+            -transition + GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 2 / 5.f,
+            -transition + GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 3 / 5.f, 0xff0000, TRUE);
         DrawTriangleAA(
           -transition + GameMarginLeft / 4, (ScreenHeight - GameMarginBottom) / 2.f,
           -transition + GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 2 / 5.f,
           -transition + GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 3 / 5.f, 0x000000, FALSE);
-      if (curPage < pages - 1)
+      }
+      if (curPage < pages - 1) {
+        if (hoverRight)
+          DrawTriangleAA(
+            transition + ScreenWidth - GameMarginLeft / 4, (ScreenHeight - GameMarginBottom) / 2.f,
+            transition + ScreenWidth - GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 2 / 5.f,
+            transition + ScreenWidth - GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 3 / 5.f, 0xff0000, TRUE);
         DrawTriangleAA(
           transition + ScreenWidth - GameMarginLeft / 4, (ScreenHeight - GameMarginBottom) / 2.f,
           transition + ScreenWidth - GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 2 / 5.f,
           transition + ScreenWidth - GameMarginLeft * 3 / 4, (ScreenHeight - GameMarginBottom) * 3 / 5.f, 0x000000, FALSE);
+      }
     }
 
     DrawFormatString(0, ScreenHeight - GameMarginBottom + GameHeight / 2.f * exrate, 0xff0000, TEXT("タイトル　：%s"), games[curSelection].title.c_str());
