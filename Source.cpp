@@ -76,7 +76,7 @@ struct GameProfile {
     std::wstring version,
     std::wstring_view description
   ) :
-    GameProfile(logger, dir, title, version, description, TEXT("autorun.exe"), TEXT("icon.png"), TEXT("detail.png"), -1) {}
+    GameProfile(logger, dir, title, version, description, TEXT("autorun.exe"), TEXT("image/unknown.png"), TEXT("image/unknown.png"), -1) {}
   GameProfile(
     std::shared_ptr<Logger> logger,
     const fs::path& dir,
@@ -94,30 +94,35 @@ struct GameProfile {
     , title(title)
     , version(version)
     , description(description)
-    , executable(executable)
-    , icon(icon)
+    , executable(dir / executable)
+    , icon(dir / icon)
     , difficulty(difficulty)
-    , detail(detail)
+    , detail(dir / detail)
     , is_movie(is_movie) {}
   void loadImage() {
-    if (fs::exists(dir / icon)) {
-      iconHandle = LoadGraph((dir / icon).c_str());
+    if (fs::exists(icon)) {
+      iconHandle = LoadGraph(icon.c_str());
       if (iconHandle == NULL) {
         logger->err(icon.string() + "を開けませんでした");
-        return;
+        iconHandle = LoadGraph(TEXT("image/unknown.png"));
       }
     }
-    else
-      logger->err(dir.string() + "内に" + icon.string() + "が存在しません。");
-    if (fs::exists(dir / detail)) {
-      detailHandle = LoadGraph((dir / detail).c_str());
+    else {
+      logger->err(icon.string() + "が存在しません。");
+      iconHandle = LoadGraph(TEXT("image/unknown.png"));
+    }
+    if (fs::exists(detail)) {
+      detailHandle = LoadGraph(detail.c_str());
       if (detailHandle == NULL) {
         logger->err(detail.string() + "を開けませんでした");
-        return;
+        detailHandle = LoadGraph(TEXT("image/unknown.png"));
       }
-      GetGraphSize(detailHandle, &detailWidth_, &detailHeight);
     }
-    else logger->err(dir.string() + "内に" + detail.string() + "が存在しません。");
+    else {
+      logger->err(detail.string() + "が存在しません。");
+      detailHandle = LoadGraph(TEXT("image/unknown.png"));
+    }
+    GetGraphSize(detailHandle, &detailWidth_, &detailHeight);
   }
 };
 
@@ -130,6 +135,7 @@ int Init(std::shared_ptr<Logger> logger) {
   SetDrawScreen(DX_SCREEN_BACK);
   SetBackgroundColor(255, 255, 255);
   if (DxLib_Init() == -1)return -1;
+
 
   games.clear();
 
@@ -168,12 +174,12 @@ int Init(std::shared_ptr<Logger> logger) {
       if (auto opt = json_data.get_child_optional(TEXT("description")))
         profile.description = opt->get_value<std::wstring>();
       if (auto opt = json_data.get_child_optional(TEXT("executable")))
-        profile.executable = opt->get_value<std::wstring>();
+        profile.executable = profile.dir / opt->get_value<std::wstring>();
       if (auto opt = json_data.get_child_optional(TEXT("icon")))
-        profile.icon = opt->get_value<std::wstring>();
+        profile.icon = profile.dir / opt->get_value<std::wstring>();
       if (auto opt = json_data.get_child_optional(TEXT("detail"))) {
         if (auto opt2 = opt->get_child_optional(TEXT("file")))
-          profile.detail = opt2->get_value<std::wstring>();
+          profile.detail = profile.dir / opt2->get_value<std::wstring>();
         if (auto opt2 = opt->get_child_optional(TEXT("is_movie")))
           profile.is_movie = opt2->get_value<bool>();
       }
@@ -182,7 +188,7 @@ int Init(std::shared_ptr<Logger> logger) {
       games.push_back(profile);
     }
     catch (const std::exception & e) {
-      logger->info(std::string("read_json failed : ") + e.what());
+      logger->info(tmp.string() + std::string("read_json failed : ") + e.what());
     }
   }
 
@@ -414,26 +420,6 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
       calc_selection();
     }
 
-    for (int y = 0; y < Rows; ++y) {
-      for (int x = 0; x < Cols; ++x) {
-        if (mouseMove
-          && GameMarginLeft + (GameWidth_ + GameSpanX) * x <= curMouseX
-          && curMouseX <= GameMarginLeft + (GameWidth_ + GameSpanX) * x + GameWidth_
-          && GameMarginTop + (GameHeight + GameSpanY) * y <= curMouseY
-          && curMouseY <= GameMarginTop + (GameHeight + GameSpanY) * y + GameHeight) {
-          int tx = selectionX, ty = selectionY;
-          selectionX = x;
-          selectionY = y;
-          calc_selection();
-          if (games.size() <= curSelection) {
-            selectionX = tx;
-            selectionY = ty;
-          }
-          calc_selection();
-        }
-      }
-    }
-
     hoverLeft = GameMarginLeft / 4 <= curMouseX && curMouseX <= GameMarginLeft * 3 / 4
       && (ScreenHeight - GameMarginBottom - GameMarginTop) * 2 / 5.f <= curMouseY
       && curMouseY <= (ScreenHeight - GameMarginBottom - GameMarginTop) * 3 / 5.f;
@@ -441,6 +427,29 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
     hoverRight = ScreenWidth - GameMarginRight * 3 / 4.f <= curMouseX && curMouseX <= ScreenWidth - GameMarginRight / 4.f
       && (ScreenHeight - GameMarginBottom - GameMarginTop) * 2 / 5.f <= curMouseY
       && curMouseY <= (ScreenHeight - GameMarginBottom - GameMarginTop) * 3 / 5.f;
+
+    for (int y = 0; y < Rows; ++y) {
+      for (int x = 0; x < Cols; ++x) {
+        if (GameMarginLeft + (GameWidth_ + GameSpanX) * x <= curMouseX
+          && curMouseX <= GameMarginLeft + (GameWidth_ + GameSpanX) * x + GameWidth_
+          && GameMarginTop + (GameHeight + GameSpanY) * y <= curMouseY
+          && curMouseY <= GameMarginTop + (GameHeight + GameSpanY) * y + GameHeight) {
+          if (mouseMove) {
+            int tx = selectionX, ty = selectionY;
+            selectionX = x;
+            selectionY = y;
+            calc_selection();
+            if (games.size() <= curSelection) {
+              selectionX = tx;
+              selectionY = ty;
+            }
+            calc_selection();
+          }
+        }
+      }
+    }
+
+
 
     if (!(prvMouseInput & MOUSE_INPUT_LEFT) && curMouseInput & MOUSE_INPUT_LEFT && hoverLeft) {
       if (curPage > 0) {
@@ -478,7 +487,7 @@ int WINAPI WinMain(HINSTANCE phI, HINSTANCE hI, LPSTR cmd, int cmdShow) {
       SetDxLibEndPostQuitMessageFlag(FALSE);
       DxLib_End();
       LaunchError_e err;
-      DWORD exitCode = Launch(games[curSelection].dir / games[curSelection].executable, ipAddr, err);
+      DWORD exitCode = Launch(games[curSelection].executable, ipAddr, err);
       if (Init(logger->shared_from_this()) == -1)return -1;
       for (auto& v : games)v.loadImage();
       ClearDrawScreen();

@@ -1,0 +1,177 @@
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Managed"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Resources"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\EmbedRuntime"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\mconfig"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\communist\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\d9629f758a9e41a6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\f9a967e6bd3ab3b6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\image"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\敵動き"の中にファイル "settings.json"が見つかりませんでした。
+[INFO]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\対戦型ブロック崩し\settings.jsonread_json failed : <unspecified file>(2): unterminated string
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\ステージマップ"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\効果音"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\簡単なシューティングゲーム\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img/title.pngが存在しません。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Managed"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Resources"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\EmbedRuntime"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\mconfig"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\communist\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\d9629f758a9e41a6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\f9a967e6bd3ab3b6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\image"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\敵動き"の中にファイル "settings.json"が見つかりませんでした。
+[INFO]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\対戦型ブロック崩し\settings.jsonread_json failed : <unspecified file>(2): unterminated string
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\ステージマップ"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\効果音"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\簡単なシューティングゲーム\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img/title.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img/title.pngが存在しません。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Managed"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Resources"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\EmbedRuntime"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\mconfig"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\communist\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\d9629f758a9e41a6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\f9a967e6bd3ab3b6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\image"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\敵動き"の中にファイル "settings.json"が見つかりませんでした。
+[INFO]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\対戦型ブロック崩し\settings.jsonread_json failed : <unspecified file>(2): unterminated string
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\ステージマップ"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\効果音"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\簡単なシューティングゲーム\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img/title.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img/title.pngが存在しません。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Managed"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Resources"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\EmbedRuntime"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\mconfig"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\communist\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\d9629f758a9e41a6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\f9a967e6bd3ab3b6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\image"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\敵動き"の中にファイル "settings.json"が見つかりませんでした。
+[INFO]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\対戦型ブロック崩し\settings.jsonread_json failed : <unspecified file>(2): unterminated string
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\ステージマップ"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\効果音"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\簡単なシューティングゲーム\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img/title.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img/title.pngが存在しません。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Managed"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\Car Race_Data\Resources"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\EmbedRuntime"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\2.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.0\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\4.5\Browsers"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\Car Race\MonoBleedingEdge\etc\mono\mconfig"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\communist\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\d9629f758a9e41a6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\.vs\Project6\v16\ipch\AutoPCH\f9a967e6bd3ab3b6"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\image"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\しまゆとシューティング\敵動き"の中にファイル "settings.json"が見つかりませんでした。
+[INFO]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\対戦型ブロック崩し\settings.jsonread_json failed : <unspecified file>(2): unterminated string
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\ステージマップ"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\効果音"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\真顔のアクションver2.0\画像"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]ゲームフォルダ "C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\簡単なシューティングゲーム\img"の中にファイル "settings.json"が見つかりませんでした。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\THE_SHOOT.ver=2\img/title.pngが存在しません。
+[ERROR]C:\Users\yuyak\Documents\Visual Studio 2019\Projects\Launcher2019\Games\2019\ｲﾗｲﾗﾛｰﾄﾞ\icon.pngが存在しません。
